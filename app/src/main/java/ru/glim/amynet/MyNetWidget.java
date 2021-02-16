@@ -1,8 +1,10 @@
 package ru.glim.amynet;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.RemoteViews;
 
 /**
@@ -17,7 +19,9 @@ public class MyNetWidget extends AppWidgetProvider {
     // Construct the RemoteViews object
     RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.my_net_widget);
     views.setTextViewText(R.id.appwidget_text, widgetText);
-
+    Intent intent = new Intent(context, SearchAbleActivity.class);
+    PendingIntent pandinint = PendingIntent.getActivity(context, 0, intent, 0);
+    views.setOnClickPendingIntent(R.id.btn_input_text, pandinint);
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views);
   }
